@@ -152,9 +152,10 @@ modulate = Color(1, 1, 1, 0.643137)
 position = Vector2(1150, 701)
 menu = NodePath("../UI/DaemonMenu")
 
-[node name="Player" parent="." node_paths=PackedStringArray("game") instance=ExtResource("2_n575r")]
+[node name="Player" parent="." node_paths=PackedStringArray("game", "camera") instance=ExtResource("2_n575r")]
 scale = Vector2(0.3, 0.3)
 game = NodePath("..")
+camera = NodePath("../Camera")
 SPEED = 60000
 
 [node name="UI" parent="." instance=ExtResource("10_6bjt1")]
@@ -175,6 +176,8 @@ grow_horizontal = 0
 environment = SubResource("Environment_v1eaa")
 
 [connection signal="exit_reached" from="Exit" to="." method="_on_exit_exit_reached"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="on_hit" from="Player" to="." method="_on_player_on_hit"]
 [connection signal="deal" from="UI/DaemonMenu" to="." method="_on_daemon_menu_deal"]
 [connection signal="on_closed" from="UI/DaemonMenu" to="." method="_on_daemon_menu_on_closed"]
 [connection signal="on_opened" from="UI/DaemonMenu" to="." method="_on_daemon_menu_on_opened"]

@@ -3,6 +3,8 @@ extends Area2D
 signal enemy_died(enemy)
 
 var aware = false
+var spike_cooldown = 0
+
 enum State {
 	SLEEPING,
 	AWAKE,
@@ -13,6 +15,12 @@ enum State {
 @export var state: State = State.SLEEPING
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
+
+func _process(delta):
+	if spike_cooldown > 0:
+		spike_cooldown -= delta
+	else:
+		spike_cooldown = 0
 
 func change_state(to):
 	state = to
@@ -40,7 +48,6 @@ func _on_area_entered(area):
 	if state == State.DEAD:
 		return
 
-	print(area)
 	if area.is_in_group("Weapon") and area.attacking:
 		die()
 
@@ -58,7 +65,8 @@ func attack():
 	$Timeout.start()
 
 func _on_spike_body_entered(body):
-	if body.is_in_group("Player"):
+	if spike_cooldown <= 0 and body.is_in_group("Player"):
+		print("PLAYER ENTERED SPIKE")
 		body.hit()
 
 func _on_aware_area_body_entered(body):
