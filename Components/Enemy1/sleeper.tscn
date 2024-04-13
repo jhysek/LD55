@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://0jsq0s7cbry7"]
+[gd_scene load_steps=14 format=3 uid="uid://0jsq0s7cbry7"]
 
 [ext_resource type="Script" path="res://Components/Enemy1/sleeper.gd" id="1_k0q21"]
 [ext_resource type="Texture2D" uid="uid://dvswwr27mmidf" path="res://Components/Enemy1/sprites.png" id="1_lh0u1"]
+[ext_resource type="Texture2D" uid="uid://c7f0vcylhgf4f" path="res://Components/Splashes/02.png" id="2_nuc78"]
 [ext_resource type="Texture2D" uid="uid://duqrgvsbv2yt0" path="res://Components/Enemy1/tongue.png" id="3_7k2w8"]
+[ext_resource type="PackedScene" uid="uid://be4d4hmhr8550" path="res://Components/BloodSplash/blood_splash.tscn" id="4_bcyvp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4xoh"]
-size = Vector2(197, 123)
+size = Vector2(267, 138)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tltpp"]
-size = Vector2(49.9417, 53.8413)
+size = Vector2(320.599, 53.8413)
 
 [sub_resource type="Animation" id="Animation_vsrss"]
 resource_name = "Idle"
@@ -25,6 +27,78 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Tongue/Spike:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Tongue/Spike:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AwareArea:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AwareArea:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_xvrcw"]
@@ -77,6 +151,54 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0.01, 0.594)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:monitorable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AwareArea:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AwareArea:monitorable")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_s8cig"]
 resource_name = "Attack"
@@ -117,9 +239,110 @@ tracks/2/keys = {
 "values": [Vector2(0.01, 0.594), Vector2(1.5, 0.594), Vector2(0.01, 0.594)]
 }
 
+[sub_resource type="Animation" id="Animation_st0xb"]
+resource_name = "Die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AwareArea:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AwareArea:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Tongue/Spike:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Tongue/Spike:monitorable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.125, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.2)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Tongue:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.01, 0.594)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0u2ci"]
 _data = {
 "Attack": SubResource("Animation_s8cig"),
+"Die": SubResource("Animation_st0xb"),
 "Idle": SubResource("Animation_vsrss"),
 "RESET": SubResource("Animation_xvrcw")
 }
@@ -127,12 +350,20 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15b6n"]
 size = Vector2(768, 120)
 
-[node name="Sleeper" type="Area2D"]
+[node name="Sleeper" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_k0q21")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(90.5, 32.5)
+position = Vector2(55.5, 25)
 shape = SubResource("RectangleShape2D_x4xoh")
+
+[node name="Splash" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.647059, 0.647059, 0.647059, 1)
+position = Vector2(93, 114)
+texture = ExtResource("2_nuc78")
 
 [node name="Body" type="Sprite2D" parent="."]
 position = Vector2(27, 94)
@@ -153,7 +384,7 @@ offset = Vector2(292.02, 0)
 position = Vector2(552.827, -13.4603)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Tongue/Spike"]
-position = Vector2(3.46814, 15.1429)
+position = Vector2(-131.861, 15.1428)
 shape = SubResource("RectangleShape2D_tltpp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -169,6 +400,9 @@ position = Vector2(585, 35)
 shape = SubResource("RectangleShape2D_15b6n")
 
 [node name="Timeout" type="Timer" parent="."]
+
+[node name="BloodSplash" parent="." instance=ExtResource("4_bcyvp")]
+position = Vector2(97, 42)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Body/Tongue/Spike" to="." method="_on_spike_body_entered"]

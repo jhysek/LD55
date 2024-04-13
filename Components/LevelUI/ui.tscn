@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyo0lcqxcv0ns"]
+[gd_scene load_steps=12 format=3 uid="uid://dyo0lcqxcv0ns"]
 
+[ext_resource type="Script" path="res://Components/LevelUI/ui.gd" id="1_4qq54"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://Components/Vignette/vignette.tscn" id="1_6hk1t"]
 [ext_resource type="Shader" path="res://Components/Vignette/vignette.gdshader" id="2_gyy8q"]
+[ext_resource type="PackedScene" uid="uid://bxkr3a8x7g83p" path="res://Components/Heart/hearts.tscn" id="4_1dg2t"]
 [ext_resource type="PackedScene" uid="uid://40v81tgjx73s" path="res://Components/Timer/timer.tscn" id="4_dylpe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jj1cd"]
@@ -71,6 +73,7 @@ _data = {
 }
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_4qq54")
 
 [node name="Vignette" parent="." instance=ExtResource("1_6hk1t")]
 material = SubResource("ShaderMaterial_jj1cd")
@@ -85,3 +88,5 @@ libraries = {
 }
 
 [node name="Timer" parent="." instance=ExtResource("4_dylpe")]
+
+[node name="Hearts" parent="." instance=ExtResource("4_1dg2t")]

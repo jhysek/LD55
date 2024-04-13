@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cehc6qdopbihl"]
+[gd_scene load_steps=26 format=3 uid="uid://cehc6qdopbihl"]
 
 [ext_resource type="Script" path="res://Components/Cthulhu/cthullu.gd" id="1_88xcm"]
 [ext_resource type="Texture2D" uid="uid://cwb7b3hfepdcb" path="res://Components/Cthulhu/body.png" id="1_xp145"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dwiaqdk5jm7uw" path="res://Components/Cthulhu/t7.png" id="11_fui76"]
 [ext_resource type="Texture2D" uid="uid://my2060xv80gr" path="res://Components/Cthulhu/t8.png" id="12_u7xke"]
 [ext_resource type="Texture2D" uid="uid://blqd2hsqpqgxf" path="res://Components/Cthulhu/t9.png" id="13_sbnve"]
+[ext_resource type="PackedScene" uid="uid://bb7mguat235p2" path="res://Components/Deals/deals.tscn" id="18_ifu1i"]
 
 [sub_resource type="Animation" id="Animation_0mxj6"]
 resource_name = "Idle"
@@ -582,6 +583,7 @@ _data = {
 [node name="Cthullu" type="Node2D"]
 script = ExtResource("1_88xcm")
 metadata/_edit_horizontal_guides_ = [597.0]
+metadata/_edit_vertical_guides_ = [1847.0]
 
 [node name="Visual" type="Node2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -687,5 +689,7 @@ offset = Vector2(-20, -487)
 libraries = {
 "": SubResource("AnimationLibrary_xkprh")
 }
+
+[node name="Deals" parent="." instance=ExtResource("18_ifu1i")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

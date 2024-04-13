@@ -1,8 +1,16 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://2y38oas4fgvb"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://2y38oas4fgvb"]
 
 [ext_resource type="FontFile" uid="uid://bax67m214kcca" path="res://Assets/Unutterable-z8E8X.ttf" id="1_3xl6n"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7chx8"]
+bg_color = Color(0, 0, 0, 0.494118)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [resource]
 Button/fonts/font = ExtResource("1_3xl6n")
+Button/styles/normal = SubResource("StyleBoxFlat_7chx8")
 Label/font_sizes/font_size = 40
 Label/fonts/font = ExtResource("1_3xl6n")

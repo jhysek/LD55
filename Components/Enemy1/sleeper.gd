@@ -1,5 +1,7 @@
 extends Area2D
 
+signal enemy_died(enemy)
+
 var aware = false
 enum State {
 	SLEEPING,
@@ -25,16 +27,29 @@ func change_state(to):
 			$Timeout.start()
 		State.ATTACKING:
 			$Body.region_rect = Rect2(0, 400, 380, 200)
+		State.DEAD:
+			print("SLEEPER IS DEAD")
+			$Body.region_rect = Rect2(0, 200, 380, 200)
+			anim.play("Die")
+			$Splash.show()
+			emit_signal("enemy_died", self)
+			$BloodSplash.emitting = true
+
 
 func _on_area_entered(area):
 	if state == State.DEAD:
 		return
 
+	print(area)
 	if area.is_in_group("Weapon") and area.attacking:
 		die()
 
+func hit():
+	die()
+
 func die():
-	state = State.DEAD
+	if state != State.DEAD:
+		change_state(State.DEAD)
 
 func attack():
 	change_state(State.ATTACKING)
@@ -57,13 +72,11 @@ func _on_aware_area_body_exited(body):
 		aware = false
 
 func _on_timeout_timeout():
-	print("TICK")
 	match state:
 		State.AWAKE:
 			attack()
 
 		State.ATTACKING:
-			print("AWARE: " + str(aware))
 			if aware:
 				attack()
 			else:

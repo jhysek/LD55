@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb7mguat235p2"]
+
+[ext_resource type="PackedScene" uid="uid://b806rl7ne7mn4" path="res://Components/DealButton/button.tscn" id="1_wn35x"]
+
+[node name="Deals" type="Node2D"]
+position = Vector2(2038, -583)
+
+[node name="Button" parent="." instance=ExtResource("1_wn35x")]
+
+[node name="Button2" parent="." instance=ExtResource("1_wn35x")]
+offset_top = 190.0
+offset_bottom = 302.0
+text = "FLY"
+
+[node name="Button3" parent="." instance=ExtResource("1_wn35x")]
+offset_left = -4.0
+offset_top = 385.0
+offset_right = 523.0
+offset_bottom = 497.0
+text = "1 x "

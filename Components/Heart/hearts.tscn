@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxkr3a8x7g83p"]
+
+[ext_resource type="Script" path="res://Components/Heart/hearts.gd" id="1_npjos"]
+[ext_resource type="Texture2D" uid="uid://cyxp0o7nqsesp" path="res://Components/Heart/heart.png" id="1_oeh7h"]
+[ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="2_j72hr"]
+
+[node name="Hearts" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 325.0
+offset_bottom = 91.0
+script = ExtResource("1_npjos")
+
+[node name="Container" type="Node2D" parent="."]
+position = Vector2(53, 42)
+
+[node name="Heart" type="Sprite2D" parent="Container"]
+position = Vector2(25.3636, 2.63637)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_oeh7h")
+
+[node name="Label" type="Label" parent="Container"]
+offset_left = -63.6364
+offset_top = -16.3636
+offset_right = -6.63636
+offset_bottom = 30.6364
+pivot_offset = Vector2(54.3636, 18.4545)
+theme = ExtResource("2_j72hr")
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 2

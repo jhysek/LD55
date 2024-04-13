@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var ui_anim: AnimationPlayer = $UI/AnimationPlayer
 @onready var timer: Label = $UI/Timer
+@onready var ui = $UI
 
 @export var player: CharacterBody2D
 @export var cthulhu: Node2D
@@ -12,8 +13,12 @@ var paused = false
 
 func _ready():
 	assert(player)
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.enemy_died.connect(_on_enemy_died)
+
 	Transition.openScene()
 	timer.start()
+	ui.change_hearts(player.lives)
 
 func _on_daemon_menu_deal(deal):
 	print("DEAL WITH DEVIL HAS BEEN MADE!" + str(deal))
@@ -37,3 +42,8 @@ func _on_daemon_menu_on_closed():
 
 func _on_exit_exit_reached():
 	Transition.switchTo("res://Scenes/game.tscn")
+
+
+func _on_enemy_died(enemy):
+	player.lives += 1
+	ui.change_hearts(player.lives)

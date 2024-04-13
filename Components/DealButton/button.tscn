@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://b806rl7ne7mn4"]
+
+[ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="1_wx8tk"]
+[ext_resource type="Texture2D" uid="uid://cyxp0o7nqsesp" path="res://Components/Heart/heart.png" id="2_wswag"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cy6l"]
+bg_color = Color(0, 0, 0, 0.635294)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfy38"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="Button" type="Button"]
+offset_right = 527.0
+offset_bottom = 112.0
+theme = ExtResource("1_wx8tk")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_1cy6l")
+text = "Double Jump"
+
+[node name="Price" type="Panel" parent="."]
+offset_left = 465.0
+offset_top = -28.0
+offset_right = 647.0
+offset_bottom = 57.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lfy38")
+
+[node name="Number" type="Label" parent="Price"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 103.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 40
+text = "3 x "
+
+[node name="Commodity" type="Sprite2D" parent="Price"]
+position = Vector2(128, 42)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wswag")
