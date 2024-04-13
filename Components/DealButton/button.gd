@@ -1,5 +1,9 @@
 extends Button
 
+func set_quit_btn():
+	$Price.hide()
+	text = "I'm good"
+
 func set_deal(deal):
 	set_price(deal.price)
 	set_product(deal.ability)

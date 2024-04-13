@@ -1,67 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://da4hulvgjj6pk"]
 
-[sub_resource type="Shader" id=25]
+[sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
+//render_mode unshaded; // optional
 
-// Amount of detail.
-uniform int octaves = 4;
+// Noise texture
+uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+// Fog density
+uniform float density: hint_range(0.0, 1.0) = 0.25;
+// Fog speed
+uniform vec2 speed = vec2(0.02, 0.01);
 
-// Opacity of the output fog.
-uniform float starting_amplitude: hint_range(0.0, 0.5) = 0.5;
 
-// Rate of pattern within the fog.
-uniform float starting_frequency = 1.0;
-
-// Shift towards transparency (clamped) for sparser fog.
-uniform float shift: hint_range(-1.0, 0.0) = -0.2;
-
-// Direction and speed of travel.
-uniform vec2 velocity = vec2(1.0, 1.0);
-
-// Color of the fog.
-uniform vec4 fog_color: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-
-// Noise texture; OpenSimplexNoise is great, but any filtered texture is fine.
-uniform sampler2D noise;
-
-float rand(vec2 uv) {
-	float amplitude = starting_amplitude;
-	float frequency = starting_frequency;
-	float output = 0.0;
-	for (int i = 0; i < 4; i++) {
-		output += texture(noise, uv * frequency).x * amplitude;
-		amplitude /= 2.0;
-		frequency *= 2.0;
-	}
-	return clamp(output + shift, 0.0, 1.0);
-}
-
+// Called for every pixel the material is visible on
 void fragment() {
-	vec2 motion = vec2(rand(UV + TIME * starting_frequency * velocity));
-	COLOR = mix(vec4(0.0), fog_color, rand(UV + motion));
-}"
+	// Make the fog slowly move
+	vec2 uv = UV + speed * TIME;
+	// Sample the noise texture
+	float noise = texture(noise_texture, uv).r;
+	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
+	// and clamp it between 0.0 and 1.0 again
+	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	// Apply the fog effect
+	COLOR.a *= fog * density;
+}
+"
 
-[sub_resource type="OpenSimplexNoise" id=26]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1mvh1"]
 
-[sub_resource type="NoiseTexture" id=27]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y0w77"]
 seamless = true
-as_normalmap = true
-bump_strength = 23.5
-noise = SubResource( 26 )
+noise = SubResource("FastNoiseLite_1mvh1")
 
-[sub_resource type="ShaderMaterial" id=28]
-shader = SubResource( 25 )
-shader_param/octaves = 4
-shader_param/starting_amplitude = 0.332
-shader_param/starting_frequency = 1.0
-shader_param/shift = -0.011
-shader_param/velocity = Vector2( 0, -0.05 )
-shader_param/fog_color = Color( 0, 0, 0, 1 )
-shader_param/noise = SubResource( 27 )
+[sub_resource type="ShaderMaterial" id="28"]
+shader = SubResource("25")
+shader_parameter/density = 0.25
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_y0w77")
 
 [node name="Fog" type="ColorRect"]
-material = SubResource( 28 )
-margin_left = -3424.0
-margin_top = -1001.0
-margin_right = 4608.0
-margin_bottom = 2483.0
+material = SubResource("28")

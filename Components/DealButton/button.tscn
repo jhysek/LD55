@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b806rl7ne7mn4"]
+[gd_scene load_steps=8 format=3 uid="uid://b806rl7ne7mn4"]
 
 [ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="1_wx8tk"]
 [ext_resource type="Script" path="res://Components/DealButton/button.gd" id="2_sxm0w"]
@@ -6,6 +6,20 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cy6l"]
 bg_color = Color(0, 0, 0, 0.635294)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ey1dl"]
+bg_color = Color(0.470588, 0, 0.0392157, 0.894118)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tsuc"]
+bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -25,6 +39,8 @@ focus_mode = 0
 theme = ExtResource("1_wx8tk")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_1cy6l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ey1dl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3tsuc")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 text = "3 x "

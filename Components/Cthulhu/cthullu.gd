@@ -6,6 +6,8 @@ signal deal(data: Dictionary)
 signal on_summon
 signal on_gone
 
+var summoned = false
+
 var deals = {}
 
 func _ready():
@@ -15,8 +17,13 @@ func _ready():
 	for code in deals:
 		var deal = deals[code]
 		var button = DealButton.instantiate()
-		button.set_deal(deal)
-		button.pressed.connect(func(): make_deal(deal))
+		if code == 'quit':
+			button.set_quit_btn()
+			button.pressed.connect(func(): back_off())
+		else:
+			button.set_deal(deal)
+			button.pressed.connect(func(): make_deal(deal))
+
 		$Deals.add_child(button)
 		button.position = Vector2(0, 0)
 		button.set_meta('target', Vector2(0, idx * 200))
@@ -52,6 +59,10 @@ func _on_animation_player_animation_finished(anim_name):
 		$AnimationPlayer.play("Idle")
 
 func summon():
+	if summoned:
+		return
+
+	summoned = true
 	show_deals()
 	emit_signal('on_summon')
 	$AnimationPlayer.play("Summon")
@@ -60,3 +71,5 @@ func back_off():
 	hide_deals()
 	emit_signal('on_gone')
 	$AnimationPlayer.play_backwards("Summon")
+	summoned = false
+

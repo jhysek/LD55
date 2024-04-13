@@ -2,7 +2,7 @@ extends Node
 
 var current_level = 0
 var abilities = {
-'doublejump' = {
+	'doublejump' = {
 		ability = {
 			name = "Double Jump",
 			code = 'doublejump'
@@ -38,6 +38,7 @@ var levels = [
 			'attack': abilities.attack,
 			'doublejump': abilities.doublejump,
 			'fly': abilities.fly,
+			'quit': {}
 		}
 	}
 ]
