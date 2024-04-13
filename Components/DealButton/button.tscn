@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b806rl7ne7mn4"]
+[gd_scene load_steps=6 format=3 uid="uid://b806rl7ne7mn4"]
 
 [ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="1_wx8tk"]
+[ext_resource type="Script" path="res://Components/DealButton/button.gd" id="2_sxm0w"]
 [ext_resource type="Texture2D" uid="uid://cyxp0o7nqsesp" path="res://Components/Heart/heart.png" id="2_wswag"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cy6l"]
@@ -20,15 +21,21 @@ corner_radius_bottom_left = 30
 [node name="Button" type="Button"]
 offset_right = 527.0
 offset_bottom = 112.0
+focus_mode = 0
 theme = ExtResource("1_wx8tk")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_1cy6l")
-text = "Double Jump"
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "3 x "
+script = ExtResource("2_sxm0w")
+metadata/target = Vector2(0, 0)
 
 [node name="Price" type="Panel" parent="."]
+layout_mode = 0
 offset_left = 465.0
 offset_top = -28.0
-offset_right = 647.0
+offset_right = 758.0
 offset_bottom = 57.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lfy38")
@@ -37,12 +44,30 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lfy38")
 layout_mode = 0
 offset_left = 25.0
 offset_top = 20.0
-offset_right = 103.0
+offset_right = 258.0
 offset_bottom = 67.0
 theme_override_font_sizes/font_size = 40
 text = "3 x "
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Price"]
+self_modulate = Color(0.447059, 0.0823529, 0.0117647, 1)
+layout_mode = 0
+offset_left = -31.0
+offset_top = -32.0
+offset_right = 202.0
+offset_bottom = 15.0
+theme_override_font_sizes/font_size = 40
+text = "price"
+horizontal_alignment = 1
 
 [node name="Commodity" type="Sprite2D" parent="Price"]
-position = Vector2(128, 42)
+position = Vector2(210, 44)
 scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wswag")
+
+[node name="Commodity" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(344, 56)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_wswag")

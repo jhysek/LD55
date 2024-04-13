@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyo0lcqxcv0ns"]
+[gd_scene load_steps=11 format=3 uid="uid://dyo0lcqxcv0ns"]
 
 [ext_resource type="Script" path="res://Components/LevelUI/ui.gd" id="1_4qq54"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://Components/Vignette/vignette.tscn" id="1_6hk1t"]
@@ -12,58 +12,16 @@ shader_parameter/vignette_intensity = 0.8
 shader_parameter/vignette_opacity = 0.098
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_coyti"]
-shader = ExtResource("2_gyy8q")
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.0
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_o3kl7"]
 resource_name = "HideDaemonVignette"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DaemonVignette:material:shader_parameter/vignette_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.287175, 0.466516),
-"update": 0,
-"values": [0.9, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_jvosb"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DaemonVignette:material:shader_parameter/vignette_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_4epc3"]
 resource_name = "ShowDaemonVignette"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DaemonVignette:material:shader_parameter/vignette_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.466516, 1),
-"update": 0,
-"values": [0.0, 0.9]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1w226"]
 _data = {
@@ -77,10 +35,6 @@ script = ExtResource("1_4qq54")
 
 [node name="Vignette" parent="." instance=ExtResource("1_6hk1t")]
 material = SubResource("ShaderMaterial_jj1cd")
-
-[node name="DaemonVignette" parent="." instance=ExtResource("1_6hk1t")]
-visible = false
-material = SubResource("ShaderMaterial_coyti")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

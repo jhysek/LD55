@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://co4sxt4oj8i8p"]
+[gd_scene load_steps=18 format=3 uid="uid://co4sxt4oj8i8p"]
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_ipb4e"]
 [ext_resource type="PackedScene" uid="uid://dumey73f7jkif" path="res://Components/Camera/camera.tscn" id="2_bwilt"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://btyqt4tcpbdus" path="res://Assets/krapnik91.png" id="3_jp4mt"]
 [ext_resource type="PackedScene" uid="uid://nh6fih4c84uc" path="res://Components/SummoningRing/summoning_ring.tscn" id="3_sjqir"]
 [ext_resource type="Texture2D" uid="uid://b4gfvlph6x7dh" path="res://Assets/placeholder.png" id="4_52ytb"]
-[ext_resource type="PackedScene" uid="uid://bjgv0ey557pa8" path="res://Components/DaemonMenu/daemon_menu.tscn" id="4_80irn"]
 [ext_resource type="Texture2D" uid="uid://cuxykqcvvmhow" path="res://Assets/noise.png" id="8_2axof"]
 [ext_resource type="PackedScene" uid="uid://cehc6qdopbihl" path="res://Components/Cthulhu/cthullu.tscn" id="9_1sdp7"]
 [ext_resource type="PackedScene" uid="uid://dyo0lcqxcv0ns" path="res://Components/LevelUI/ui.tscn" id="10_6bjt1"]
@@ -123,6 +122,7 @@ offset_left = -3567.0
 offset_top = 1005.0
 offset_right = 1792.0
 offset_bottom = 2648.0
+mouse_filter = 2
 texture = ExtResource("4_52ytb")
 
 [node name="Noise" type="TextureRect" parent="."]
@@ -131,6 +131,7 @@ offset_left = -3665.0
 offset_top = -1987.0
 offset_right = 3527.0
 offset_bottom = 2193.0
+mouse_filter = 2
 texture = ExtResource("8_2axof")
 expand_mode = 2
 stretch_mode = 1
@@ -147,37 +148,31 @@ position = Vector2(-1396, 535)
 rotation = 1.58484
 scale = Vector2(-1, 1)
 
-[node name="SummoningRing" parent="." node_paths=PackedStringArray("menu") instance=ExtResource("3_sjqir")]
+[node name="SummoningRing" parent="." node_paths=PackedStringArray("cthulhu") instance=ExtResource("3_sjqir")]
 modulate = Color(1, 1, 1, 0.643137)
 position = Vector2(1150, 701)
-menu = NodePath("../UI/DaemonMenu")
+cthulhu = NodePath("../Cthullu")
 
 [node name="Player" parent="." node_paths=PackedStringArray("game", "camera") instance=ExtResource("2_n575r")]
 scale = Vector2(0.3, 0.3)
+abilities = {
+"attack": false,
+"doublejump": false,
+"fly": false,
+"jump": true
+}
 game = NodePath("..")
 camera = NodePath("../Camera")
 SPEED = 60000
 
 [node name="UI" parent="." instance=ExtResource("10_6bjt1")]
 
-[node name="DaemonMenu" parent="UI" instance=ExtResource("4_80irn")]
-anchors_preset = 11
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -384.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v1eaa")
 
+[connection signal="deal" from="Cthullu" to="." method="_on_cthullu_deal"]
+[connection signal="on_gone" from="Cthullu" to="." method="_on_cthullu_on_gone"]
+[connection signal="on_summon" from="Cthullu" to="." method="_on_cthullu_on_summon"]
 [connection signal="exit_reached" from="Exit" to="." method="_on_exit_exit_reached"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="on_hit" from="Player" to="." method="_on_player_on_hit"]
-[connection signal="deal" from="UI/DaemonMenu" to="." method="_on_daemon_menu_deal"]
-[connection signal="on_closed" from="UI/DaemonMenu" to="." method="_on_daemon_menu_on_closed"]
-[connection signal="on_opened" from="UI/DaemonMenu" to="." method="_on_daemon_menu_on_opened"]

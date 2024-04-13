@@ -1,8 +1,45 @@
 extends Node
 
 var current_level = 0
+var abilities = {
+'doublejump' = {
+		ability = {
+			name = "Double Jump",
+			code = 'doublejump'
+		},
+		price = {
+			lives = 2
+		}
+	},
+	'fly' = {
+		ability = {
+			name = "Flying",
+			code = 'fly'
+		},
+		price = {
+			lives = 2
+		}
+	},
+	'attack' = {
+		ability = {
+			name = "Attack",
+			code = 'attack'
+		},
+		price = {
+			lives = 2
+		}
+	}
+}
+
 var levels = [
-	"res://Scenes/game.tscn",
+	{
+		scene = "res://Scenes/game.tscn",
+		deals = {
+			'attack': abilities.attack,
+			'doublejump': abilities.doublejump,
+			'fly': abilities.fly,
+		}
+	}
 ]
 
 func _ready():
@@ -14,6 +51,12 @@ func _input(event):
 
 func get_current_level():
 	return levels[current_level]
+
+func get_current_deals():
+	if levels[current_level] && levels[current_level].has('deals'):
+		return levels[current_level].deals
+	else:
+		return {}
 
 func restart_level():
 	get_tree().reload_current_scene()
