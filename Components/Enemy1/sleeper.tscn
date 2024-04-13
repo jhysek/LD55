@@ -1,0 +1,178 @@
+[gd_scene load_steps=11 format=3 uid="uid://0jsq0s7cbry7"]
+
+[ext_resource type="Script" path="res://Components/Enemy1/sleeper.gd" id="1_k0q21"]
+[ext_resource type="Texture2D" uid="uid://dvswwr27mmidf" path="res://Components/Enemy1/sprites.png" id="1_lh0u1"]
+[ext_resource type="Texture2D" uid="uid://duqrgvsbv2yt0" path="res://Components/Enemy1/tongue.png" id="3_7k2w8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4xoh"]
+size = Vector2(197, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tltpp"]
+size = Vector2(49.9417, 53.8413)
+
+[sub_resource type="Animation" id="Animation_vsrss"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_xvrcw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Tongue/Spike:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Tongue/Spike:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Tongue:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.01, 0.594)]
+}
+
+[sub_resource type="Animation" id="Animation_s8cig"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Tongue/Spike:monitorable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Tongue/Spike:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Tongue:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(0.267943, 6.06286, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.594), Vector2(1.5, 0.594), Vector2(0.01, 0.594)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0u2ci"]
+_data = {
+"Attack": SubResource("Animation_s8cig"),
+"Idle": SubResource("Animation_vsrss"),
+"RESET": SubResource("Animation_xvrcw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15b6n"]
+size = Vector2(768, 120)
+
+[node name="Sleeper" type="Area2D"]
+script = ExtResource("1_k0q21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(90.5, 32.5)
+shape = SubResource("RectangleShape2D_x4xoh")
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(27, 94)
+texture = ExtResource("1_lh0u1")
+offset = Vector2(-27, -94)
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 380, 200)
+
+[node name="Tongue" type="Sprite2D" parent="Body"]
+modulate = Color(0.509804, 0, 0.470588, 1)
+show_behind_parent = true
+position = Vector2(50, -25)
+scale = Vector2(0.01, 0.594)
+texture = ExtResource("3_7k2w8")
+offset = Vector2(292.02, 0)
+
+[node name="Spike" type="Area2D" parent="Body/Tongue"]
+position = Vector2(552.827, -13.4603)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Tongue/Spike"]
+position = Vector2(3.46814, 15.1429)
+shape = SubResource("RectangleShape2D_tltpp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0u2ci")
+}
+autoplay = "Idle"
+
+[node name="AwareArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AwareArea"]
+position = Vector2(585, 35)
+shape = SubResource("RectangleShape2D_15b6n")
+
+[node name="Timeout" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="Body/Tongue/Spike" to="." method="_on_spike_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="AwareArea" to="." method="_on_aware_area_body_entered"]
+[connection signal="body_exited" from="AwareArea" to="." method="_on_aware_area_body_exited"]
+[connection signal="timeout" from="Timeout" to="." method="_on_timeout_timeout"]

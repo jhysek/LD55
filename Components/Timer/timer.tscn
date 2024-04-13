@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://40v81tgjx73s"]
+
+[ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="1_ys3jv"]
+[ext_resource type="Script" path="res://Components/Timer/timer.gd" id="2_v871y"]
+
+[node name="Timer" type="Label"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -134.0
+offset_top = 35.0
+offset_right = -31.0
+offset_bottom = 82.0
+grow_horizontal = 0
+theme = ExtResource("1_ys3jv")
+theme_override_font_sizes/font_size = 30
+text = "00:00"
+script = ExtResource("2_v871y")
