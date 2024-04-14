@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b806rl7ne7mn4"]
+[gd_scene load_steps=9 format=3 uid="uid://b806rl7ne7mn4"]
 
 [ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="1_wx8tk"]
 [ext_resource type="Script" path="res://Components/DealButton/button.gd" id="2_sxm0w"]
@@ -25,6 +25,13 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2ayj"]
+bg_color = Color(0.6, 0.6, 0.6, 0.227451)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfy38"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 30
@@ -41,6 +48,7 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_1cy6l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ey1dl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3tsuc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_p2ayj")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 text = "3 x "
@@ -67,12 +75,11 @@ text = "3 x "
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="Price"]
-self_modulate = Color(0.447059, 0.0823529, 0.0117647, 1)
 layout_mode = 0
-offset_left = -31.0
-offset_top = -32.0
-offset_right = 202.0
-offset_bottom = 15.0
+offset_left = -38.0
+offset_top = -34.0
+offset_right = 195.0
+offset_bottom = 13.0
 theme_override_font_sizes/font_size = 40
 text = "price"
 horizontal_alignment = 1

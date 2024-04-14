@@ -1,5 +1,11 @@
 extends Button
 
+@export var SIMPLE = false
+
+func _ready():
+	if SIMPLE:
+		$Price.hide()
+
 func set_quit_btn():
 	$Price.hide()
 	text = "I'm good"
@@ -23,3 +29,6 @@ func set_product(product):
 	else:
 		text = product.name
 		$Commodity.hide()
+
+func disable():
+	disabled = true

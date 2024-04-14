@@ -2,18 +2,18 @@ extends Node2D
 
 func _ready():
 	Transition.openScene()
-
-func _on_button_pressed():
-	play("Click")
-	LevelSwitcher.start_level()
+	$Cthullu.summon()
 
 func _on_button_mouse_entered():
-	play("Hover")
+	$Sfx/Hover.play()
 
 func _on_button_mouse_exited():
-	play("Hover")
+	$Sfx/Hover.play()
 
 func play(name):
 	if $Sfx.has_node(name):
 		$Sfx.get_node(name).play
 
+func _on_button_2_pressed():
+	$Sfx/Click.play()
+	LevelSwitcher.start_level()

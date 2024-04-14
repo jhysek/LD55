@@ -1,14 +1,16 @@
 extends Area2D
 
 @export var cthulhu: Node2D
+@export var STATIC: bool = false
 
 var enabled = false
 
 func _ready():
-	assert(cthulhu)
+	if !STATIC:
+		assert(cthulhu)
 
 func _on_body_entered(body):
-	if body.is_in_group("Player"):
+	if !STATIC and body.is_in_group("Player"):
 		$Timer.start()
 		enabled = true
 
