@@ -1,52 +1,294 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnc6f76dntk35"]
+[gd_scene load_steps=22 format=3 uid="uid://c5x41udy42ugy"]
 
 [ext_resource type="Script" path="res://Levels/finished.gd" id="1_3ejao"]
-[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://Components/Vignette/vignette.tscn" id="2_37ucx"]
+[ext_resource type="PackedScene" uid="uid://dumey73f7jkif" path="res://Components/Camera/camera.tscn" id="2_dxfv1"]
+[ext_resource type="Texture2D" uid="uid://cwjny65dpocsu" path="res://Assets/cubist_noise.png" id="3_0myb7"]
 [ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="3_62ivd"]
+[ext_resource type="Texture2D" uid="uid://btyqt4tcpbdus" path="res://Assets/krapnik91.png" id="4_44spt"]
+[ext_resource type="PackedScene" uid="uid://da4hulvgjj6pk" path="res://Components/Fog/Fog.tscn" id="4_pc0hw"]
+[ext_resource type="PackedScene" uid="uid://cehc6qdopbihl" path="res://Components/Cthulhu/cthullu.tscn" id="4_re8fi"]
+[ext_resource type="PackedScene" uid="uid://21sv5o73o1qs" path="res://Components/Player/player.tscn" id="5_kyc0j"]
+[ext_resource type="PackedScene" uid="uid://b806rl7ne7mn4" path="res://Components/DealButton/button.tscn" id="5_yy3jl"]
+[ext_resource type="Texture2D" uid="uid://cuxykqcvvmhow" path="res://Assets/noise.png" id="6_2vvle"]
+[ext_resource type="TileSet" uid="uid://b77bn8eqs4cr5" path="res://Assets/tileset.tres" id="7_h4pwn"]
+[ext_resource type="PackedScene" uid="uid://nh6fih4c84uc" path="res://Components/SummoningRing/summoning_ring.tscn" id="8_ehfs4"]
+[ext_resource type="AudioStream" uid="uid://dflwpg07truws" path="res://Assets/sfx/hover.wav" id="11_l0k0f"]
+[ext_resource type="AudioStream" uid="uid://bek5uw6qcfvg3" path="res://Assets/sfx/click.wav" id="12_amqfo"]
 
-[node name="Finished" type="Node2D"]
+[sub_resource type="Shader" id="Shader_fbi6v"]
+code = "shader_type canvas_item;
+
+uniform float vignette_intensity = 0.4;
+uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
+uniform vec4 vignette_rgb : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform sampler2D screen_vec : hint_screen_texture;
+
+float vignette(vec2 uv){
+	uv *= 1.0 - uv.xy;
+	float vignette = uv.x * uv.y * 15.0;
+	return pow(vignette, vignette_intensity * vignette_opacity);
+}
+
+void fragment(){
+	vec4 color = texture(screen_vec, SCREEN_UV);
+	vec4 text = texture(TEXTURE, UV);
+
+	text.rgba *= (vignette_rgb.rgba);
+	text.rgba *= (1.0 - vignette(UV));
+
+	COLOR = vec4((text.rgb)*color.rgb,text.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xb6ue"]
+shader = SubResource("Shader_fbi6v")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.532
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_otlyf"]
+blend_mode = 3
+
+[sub_resource type="Environment" id="Environment_whmng"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_bloom = 0.23
+adjustment_enabled = true
+adjustment_contrast = 1.18
+
+[sub_resource type="Animation" id="Animation_3xcw7"]
+resource_name = "Start"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.5),
+"transitions": PackedFloat32Array(1, 1.7411, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.607843)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.7, 3.5),
+"transitions": PackedFloat32Array(1, 1.51572, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"back_off"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StartBtn:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_47vxh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.607843)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StartBtn:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20jit"]
+_data = {
+"RESET": SubResource("Animation_47vxh"),
+"Start": SubResource("Animation_3xcw7")
+}
+
+[node name="Menu" type="Node2D"]
 script = ExtResource("1_3ejao")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Vignette" parent="CanvasLayer" instance=ExtResource("2_37ucx")]
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_xb6ue")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
+modulate = Color(0.407843, 0.407843, 0.407843, 0.721569)
+offset_left = -7385.0
+offset_top = -3101.0
+offset_right = 7777.0
+offset_bottom = 4594.0
+texture = ExtResource("3_0myb7")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(0.133333, 0.133333, 0.133333, 0.305882)
+offset_left = -3537.0
+offset_top = -147.0
+offset_right = 1835.0
+offset_bottom = 848.0
+texture = ExtResource("4_44spt")
+stretch_mode = 1
+
+[node name="Cthullu" parent="." instance=ExtResource("4_re8fi")]
+position = Vector2(-622, 35)
+scale = Vector2(0.7, 0.7)
+
+[node name="Fog" parent="." instance=ExtResource("4_pc0hw")]
+custom_minimum_size = Vector2(1000, 1000)
+offset_left = -1406.0
+offset_top = -1091.0
+offset_right = 1403.0
+offset_bottom = 911.0
+color = Color(1, 1, 1, 0.454902)
+
+[node name="StartBtn" parent="." instance=ExtResource("5_yy3jl")]
+modulate = Color(1, 1, 1, 0)
+offset_left = -261.0
+offset_top = 257.0
+offset_right = 266.0
+offset_bottom = 369.0
+text = "back to menu"
+SIMPLE = true
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(-369, -238)
+tile_set = ExtResource("7_h4pwn")
+format = 2
+layer_0/tile_data = PackedInt32Array(524277, 262144, 0, 524278, 262144, 0, 524279, 262144, 0, 524280, 262144, 0, 524281, 0, 0, 524282, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 262144, 0, 458760, 262144, 0, 458761, 262144, 0, 458762, 262144, 0, 458763, 262144, 0, 458764, 262144, 0, 458765, 262144, 0, 458744, 0, 0, 458743, 0, 0, 458742, 0, 0, 458741, 0, 0, 458747, 65536, 0, 458746, 65536, 0, 458748, 65536, 0, 458749, 65536, 0, 458750, 65536, 0, 458751, 65536, 0, 393216, 65536, 0, 393217, 65536, 0, 393218, 65536, 0, 393219, 65536, 0, 393220, 65536, 0, 393221, 65536, 0, 393222, 65536, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458745, 131072, 1, 393209, 196608, 1, 393208, 65536, 0, 393207, 65536, 0, 393206, 65536, 0, 327689, 65536, 0, 327688, 65536, 0, 327687, 65536, 1, 327690, 65536, 0, 589813, 262144, 0, 524301, 262144, 1, 524300, 262144, 1, 524299, 262144, 1, 524298, 262144, 1, 524297, 262144, 1, 524296, 262144, 1, 524295, 262144, 1, 524294, 262144, 1, 524293, 262144, 1, 524292, 262144, 1, 524291, 262144, 1, 524290, 262144, 1, 524289, 262144, 1, 524288, 262144, 1, 589823, 262144, 1, 589822, 262144, 1, 589821, 262144, 1, 589820, 262144, 1, 589819, 262144, 1, 589818, 262144, 1, 589817, 262144, 1, 589816, 262144, 1, 589815, 262144, 1, 458766, 262144, 1, 524302, 262144, 1, 327691, 65536, 0, 327692, 65536, 0, 393205, 65536, 1, 589814, 262144, 1, 655349, 262144, 1, 655350, 262144, 1, 655351, 262144, 1, 655352, 262144, 1, 655353, 262144, 1, 655354, 262144, 1, 655355, 262144, 1, 655356, 262144, 1, 655357, 262144, 1, 655358, 262144, 1, 655359, 262144, 1, 589824, 262144, 1, 589825, 262144, 1, 589826, 262144, 1, 589827, 262144, 1, 589828, 262144, 1, 589829, 262144, 1, 589830, 262144, 1, 589831, 262144, 1, 589832, 262144, 1, 589833, 262144, 1, 589834, 262144, 1, 589835, 262144, 1, 589836, 262144, 1, 589837, 262144, 1, 589838, 262144, 1, 327693, 196608, 1, 393229, 131072, 1, 393230, 65536, 0, 393231, 196608, 1, 458767, 262144, 1, 524303, 262144, 1, 589839, 262144, 1)
+
+[node name="SummoningRing" parent="TileMap" instance=ExtResource("8_ehfs4")]
+position = Vector2(1143, 706)
+STATIC = true
+
+[node name="Camera" parent="." instance=ExtResource("2_dxfv1")]
+position = Vector2(-5, 5)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Noise" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_otlyf")
+custom_minimum_size = Vector2(100, 1000)
+offset_left = -2109.0
+offset_top = -1003.0
+offset_right = 2331.0
+offset_bottom = 997.0
+mouse_filter = 2
+texture = ExtResource("6_2vvle")
+expand_mode = 2
+stretch_mode = 1
+flip_h = true
 
 [node name="Title" type="Label" parent="."]
-offset_left = -177.0
-offset_top = -267.0
-offset_right = 543.0
-offset_bottom = 22.0
+modulate = Color(1, 1, 1, 0.607843)
+offset_left = 99.0
+offset_top = -538.0
+offset_right = 1082.0
+offset_bottom = -446.0
 theme = ExtResource("3_62ivd")
-theme_override_font_sizes/font_size = 60
-text = "Cthulhu is not Angry.
+theme_override_font_sizes/font_size = 80
+text = "Cthulhu is not angry"
 
-you may stay alive."
+[node name="Title2" type="Label" parent="."]
+offset_left = 161.0
+offset_top = -392.0
+offset_right = 1035.0
+offset_bottom = -254.0
+theme = ExtResource("3_62ivd")
+theme_override_colors/font_color = Color(0.52549, 0.0980392, 0.0196078, 1)
+theme_override_font_sizes/font_size = 120
+text = "You may live"
 
 [node name="About" type="Label" parent="."]
-offset_left = -246.0
-offset_top = 267.0
-offset_right = 269.0
-offset_bottom = 301.0
+modulate = Color(1, 1, 1, 0.427451)
+offset_left = 558.0
+offset_top = 591.0
+offset_right = 1137.0
+offset_bottom = 625.0
 theme = ExtResource("3_62ivd")
 theme_override_font_sizes/font_size = 20
 text = "Made in 48h for Ludum Dare 55 compo by Jiri Hysek."
 
-[node name="Button" type="Button" parent="."]
-offset_left = -114.0
-offset_top = 40.0
-offset_right = 113.0
-offset_bottom = 104.0
-theme = ExtResource("3_62ivd")
-text = "Back to menu"
-
 [node name="Sfx" type="Node" parent="."]
 
 [node name="Hover" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("11_l0k0f")
+volume_db = 3.586
 
 [node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("12_amqfo")
 
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Player" parent="." instance=ExtResource("5_kyc0j")]
+position = Vector2(1077, 475)
+scale = Vector2(-0.2, 0.2)
+STATIC = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_whmng")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_20jit")
+}
+autoplay = "Start"
+speed_scale = 0.5
+
+[connection signal="pressed" from="StartBtn" to="." method="_on_button_pressed"]

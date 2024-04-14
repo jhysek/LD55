@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyo0lcqxcv0ns"]
+[gd_scene load_steps=10 format=3 uid="uid://dyo0lcqxcv0ns"]
 
 [ext_resource type="Script" path="res://Components/LevelUI/ui.gd" id="1_4qq54"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://Components/Vignette/vignette.tscn" id="1_6hk1t"]
 [ext_resource type="Shader" path="res://Components/Vignette/vignette.gdshader" id="2_gyy8q"]
 [ext_resource type="PackedScene" uid="uid://bxkr3a8x7g83p" path="res://Components/Heart/hearts.tscn" id="4_1dg2t"]
-[ext_resource type="PackedScene" uid="uid://40v81tgjx73s" path="res://Components/Timer/timer.tscn" id="4_dylpe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jj1cd"]
 shader = ExtResource("2_gyy8q")
@@ -41,6 +40,12 @@ libraries = {
 "": SubResource("AnimationLibrary_1w226")
 }
 
-[node name="Timer" parent="." instance=ExtResource("4_dylpe")]
-
 [node name="Hearts" parent="." instance=ExtResource("4_1dg2t")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 14.0
+offset_right = 0.0
+offset_bottom = 105.0
+grow_horizontal = 0
