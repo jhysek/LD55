@@ -33,6 +33,20 @@ var abilities = {
 
 var levels = [
 	{
+		scene = "res://Levels/level01.tscn",
+		deals = {}
+	},
+
+	{
+		scene = "res://Levels/level02.tscn",
+		deals = {
+			'attack': abilities.attack,
+			'doublejump': abilities.doublejump,
+			'quit': {}
+		}
+	},
+
+	{
 		scene = "res://Scenes/game.tscn",
 		deals = {
 			'attack': abilities.attack,

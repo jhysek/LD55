@@ -16,6 +16,9 @@ enum State {
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+func _ready():
+	change_state(state)
+
 func _process(delta):
 	if spike_cooldown > 0:
 		spike_cooldown -= delta

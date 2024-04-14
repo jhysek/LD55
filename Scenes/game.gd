@@ -8,6 +8,7 @@ extends Node2D
 @export var cthulhu: Node2D
 @export var camera: Camera2D
 
+
 var paused = false
 
 func _ready():
@@ -20,6 +21,7 @@ func _ready():
 
 	Transition.openScene()
 	timer.start()
+	ui.show()
 	ui.change_hearts(player.lives)
 
 ## ENEMY CALLBACKS ###############################

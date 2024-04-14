@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var debug_level_idx = 1
+
 var DealButton = load("res://Components/DealButton/button.tscn")
 
 signal deal(data: Dictionary)
@@ -12,6 +14,10 @@ var deals = {}
 
 func _ready():
 	var idx = 0
+
+	if debug_level_idx:
+		LevelSwitcher.current_level = debug_level_idx
+
 	deals = LevelSwitcher.get_current_deals()
 
 	for code in deals:
@@ -35,9 +41,10 @@ func show_deals():
 	var idx = 0
 	for code in deals:
 		var deal = deals[code]
+
 		var tween = create_tween().set_parallel(true)
-		tween.tween_property(deal.node, 'position', deal.node.get_meta('target'), 1).set_delay(idx * 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-		tween.tween_property(deal.node, 'modulate', Color(1,1,1,1.0), 0.5)
+		tween.tween_property(deal.node, 'position', deal.node.get_meta('target'), 1).set_delay(2 + idx * 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(deal.node, 'modulate', Color(1,1,1,1.0), 0.5).set_delay(2 + idx * 0.2)
 
 		idx += 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://co4sxt4oj8i8p"]
+[gd_scene load_steps=22 format=3 uid="uid://cccha58c83snh"]
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_ipb4e"]
 [ext_resource type="PackedScene" uid="uid://dumey73f7jkif" path="res://Components/Camera/camera.tscn" id="2_bwilt"]
@@ -7,13 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://cd40mea0array" path="res://Components/Exit/exit.tscn" id="3_cqhwr"]
 [ext_resource type="Texture2D" uid="uid://cdqtrpnwtuggg" path="res://Assets/tileset.png" id="3_d3426"]
 [ext_resource type="Texture2D" uid="uid://btyqt4tcpbdus" path="res://Assets/krapnik91.png" id="3_jp4mt"]
-[ext_resource type="PackedScene" uid="uid://nh6fih4c84uc" path="res://Components/SummoningRing/summoning_ring.tscn" id="3_sjqir"]
 [ext_resource type="Texture2D" uid="uid://b4gfvlph6x7dh" path="res://Assets/placeholder.png" id="4_52ytb"]
 [ext_resource type="Texture2D" uid="uid://cuxykqcvvmhow" path="res://Assets/noise.png" id="8_2axof"]
 [ext_resource type="PackedScene" uid="uid://cehc6qdopbihl" path="res://Components/Cthulhu/cthullu.tscn" id="9_1sdp7"]
 [ext_resource type="PackedScene" uid="uid://dyo0lcqxcv0ns" path="res://Components/LevelUI/ui.tscn" id="10_6bjt1"]
 [ext_resource type="PackedScene" uid="uid://c32dagsu5q5tk" path="res://Components/Spikes/spikes.tscn" id="14_3kmkg"]
-[ext_resource type="PackedScene" uid="uid://0jsq0s7cbry7" path="res://Components/Enemy1/sleeper.tscn" id="14_ma0ae"]
+[ext_resource type="Theme" uid="uid://2y38oas4fgvb" path="res://Assets/theme.tres" id="14_uryi4"]
 
 [sub_resource type="Shader" id="Shader_oin6d"]
 code = "shader_type canvas_item;
@@ -81,7 +80,6 @@ texture_region_size = Vector2i(128, 128)
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
@@ -131,6 +129,7 @@ script = ExtResource("1_ipb4e")
 player = NodePath("Player")
 cthulhu = NodePath("Cthullu")
 camera = NodePath("Camera")
+metadata/_edit_horizontal_guides_ = [1028.0]
 
 [node name="Bg" type="TextureRect" parent="."]
 modulate = Color(0.407843, 0.407843, 0.407843, 0.721569)
@@ -152,8 +151,11 @@ texture = ExtResource("3_jp4mt")
 stretch_mode = 1
 
 [node name="Camera" parent="." instance=ExtResource("2_bwilt")]
+position = Vector2(-507, 224)
+zoom = Vector2(0.25, 0.25)
 
 [node name="Cthullu" parent="." instance=ExtResource("9_1sdp7")]
+visible = false
 position = Vector2(-948, -122)
 
 [node name="Fog" type="ColorRect" parent="."]
@@ -167,15 +169,16 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0.317647)
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 1)
 tile_set = SubResource("TileSet_6m4cf")
 format = 2
-layer_0/tile_data = PackedInt32Array(327666, 262144, 0, 393202, 262144, 0, 458738, 262144, 0, 524274, 262144, 0, 524275, 262144, 0, 524276, 262144, 0, 524277, 262144, 0, 524278, 262144, 0, 524279, 262144, 0, 524280, 262144, 0, 524281, 0, 0, 524282, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 262144, 0, 458760, 262144, 0, 458761, 262144, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 262144, 0, 393229, 262144, 0, 327693, 262144, 0, 262157, 0, 0, 262121, 0, 0, 327657, 0, 0, 458744, 0, 0, 458743, 0, 0, 458742, 0, 0, 458741, 0, 0, 458740, 0, 0, 458739, 262144, 0, 458737, 262144, 0, 458736, 262144, 0, 458735, 262144, 0, 458734, 0, 1, 524273, 262144, 0, 393201, 262144, 0, 327664, 262144, 0, 327660, 0, 1, 327661, 0, 1, 327662, 0, 1, 327663, 262144, 0, 393200, 262144, 0, 393199, 262144, 0, 393198, 0, 1, 393197, 0, 1, 327659, 0, 1, 327658, 0, 0, 327656, 0, 0, 327655, 0, 0, 393191, 0, 0, 393190, 0, 0, 393192, 0, 0, 393193, 0, 0, 393194, 0, 0, 393195, 0, 1, 393196, 0, 1, 458730, 0, 0, 458729, 0, 0, 458728, 0, 0, 458727, 0, 0, 458731, 0, 1, 458732, 0, 1, 458733, 0, 1, 524272, 262144, 0, 524271, 262144, 0, 524270, 0, 1, 524269, 0, 1, 524268, 0, 1, 524267, 0, 1, 524266, 0, 0, 524265, 0, 0, 524264, 0, 0, 524263, 0, 0, 524262, 0, 0, 458726, 0, 0, 458725, 0, 0, 393189, 0, 0, 327654, 0, 0, 327653, 0, 0, 327652, 0, 0, 524261, 0, 0, 524260, 0, 0, 458724, 0, 0, 393188, 0, 0, 327665, 262144, 0, 327667, 262144, 0, 393203, 262144, 0, 458747, 65536, 0, 458746, 65536, 0, 458748, 65536, 0, 458749, 65536, 0, 458750, 65536, 0, 458751, 65536, 0, 393216, 65536, 0, 393217, 65536, 0, 393218, 65536, 0, 393219, 65536, 0, 393220, 65536, 0, 393221, 65536, 0, 393222, 65536, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 131072, 1, 393227, 65536, 0, 393228, 65536, 0, 458745, 131072, 1, 393209, 196608, 1, 393208, 65536, 0, 393207, 65536, 0, 393206, 65536, 0, 393205, 65536, 0, 393204, 131072, 0, 327668, 262144, 0, 262132, 262144, 0, 262131, 0, 0, 262130, 0, 0, 196594, 65536, 0, 196595, 65536, 0, 196596, 196608, 0, 262129, 0, 0, 196593, 65536, 0, 196592, 65536, 0, 196591, 65536, 1, 196590, 0, 1, 262126, 0, 1, 262128, 0, 0, 262127, 0, 0, 262125, 0, 1, 196589, 0, 1, 196588, 0, 1, 196587, 0, 1, 262123, 0, 1, 262124, 0, 1, 196622, 196608, 0, 196621, 65536, 1, 262158, 262144, 1, 327694, 262144, 1, 393230, 262144, 1, 458766, 262144, 1, 524302, 262144, 1, 589838, 262144, 1, 655374, 262144, 1, 720910, 262144, 1, 786446, 262144, 1, 851982, 262144, 1, 917518, 262144, 1, 983054, 262144, 1, 327689, 65536, 0, 327688, 65536, 0, 327687, 65536, 1, 327690, 196608, 1, 589807, 262144, 0, 589808, 262144, 0, 589809, 262144, 0, 589810, 262144, 0, 589811, 262144, 0, 589812, 262144, 0, 589813, 262144, 0, 589814, 262144, 0, 589815, 262144, 0, 589816, 262144, 0, 589817, 262144, 0, 589818, 262144, 0)
+layer_0/tile_data = PackedInt32Array(524274, 0, 0, 524275, 0, 0, 524276, 0, 0, 524277, 0, 0, 524278, 262144, 0, 524279, 262144, 0, 524280, 0, 0, 524281, 0, 0, 524282, 0, 0, 524283, 0, 0, 524284, 262144, 0, 524285, 262144, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 262144, 0, 458755, 262144, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 262144, 0, 458761, 262144, 0, 458762, 262144, 0, 458763, 262144, 0, 458764, 262144, 0, 458765, 262144, 0, 393229, 262144, 0, 327693, 262144, 0, 262157, 262144, 0, 524273, 262144, 0, 327660, 0, 1, 327661, 0, 1, 327662, 0, 1, 458731, 65536, 0, 458732, 65536, 0, 524272, 262144, 0, 524271, 0, 0, 524270, 0, 0, 524269, 0, 0, 524268, 0, 0, 524267, 0, 0, 458746, 65536, 0, 458748, 0, 0, 458749, 0, 0, 458751, 65536, 0, 393218, 0, 0, 393219, 0, 0, 393220, 131072, 1, 393221, 65536, 0, 393222, 65536, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458745, 65536, 0, 196590, 0, 1, 196587, 0, 1, 196622, 262144, 1, 262158, 262144, 1, 327694, 262144, 1, 393230, 262144, 1, 458766, 262144, 1, 524302, 262144, 1, 589838, 262144, 1, 655374, 262144, 1, 720910, 262144, 1, 786446, 262144, 1, 851982, 262144, 1, 917518, 262144, 1, 983054, 262144, 1, 327689, 65536, 0, 327688, 65536, 1, 327690, 65536, 0, 589807, 262144, 0, 589808, 262144, 0, 589809, 262144, 0, 589810, 262144, 0, 589811, 262144, 0, 589812, 262144, 0, 589813, 262144, 0, 589814, 262144, 0, 589815, 262144, 0, 589816, 262144, 0, 589817, 262144, 0, 589818, 262144, 0, 1048590, 262144, 1, 1114126, 262144, 1, 1179662, 262144, 1, 1245198, 262144, 1, 458744, 131072, 1, 458743, 0, 0, 458742, 0, 0, 458741, 65536, 0, 458740, 65536, 0, 458739, 65536, 0, 458737, 0, 0, 458736, 0, 0, 196621, 0, 0, 458735, 65536, 0, 458733, 65536, 0, 458734, 65536, 0, 524266, 0, 0, 458730, 131072, 1, 393194, 262144, 0, 327658, 262144, 1, 327657, 262144, 0, 393193, 262144, 0, 458729, 262144, 0, 524265, 262144, 0, 589801, 262144, 0, 262121, 0, 0, 196586, 196608, 1, 262122, 262144, 1, 196585, 65536, 1, 393201, 65536, 0, 393202, 196608, 0, 393206, 65536, 1, 393208, 196608, 0, 393207, 65536, 0, 131086, 196608, 1, 131085, 65536, 1, 327691, 65536, 0, 327692, 65536, 0, 458747, 65536, 0, 393217, 65536, 0, 393216, 65536, 0, 393223, 65536, 0, 458738, 131072, 1, 393200, 65536, 1, 393212, 65536, 1, 327682, 65536, 1, 393213, 65536, 0, 327683, 65536, 0, 458750, 131072, 1, 327684, 196608, 0, 393214, 196608, 0)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.113725, 0.113725, 0.113725, 1)
-offset_left = -3567.0
-offset_top = 1005.0
-offset_right = 1792.0
+offset_left = -2940.0
+offset_top = 1025.0
+offset_right = 1920.0
 offset_bottom = 2648.0
 mouse_filter = 2
 texture = ExtResource("4_52ytb")
@@ -193,23 +196,12 @@ stretch_mode = 1
 flip_h = true
 
 [node name="Exit" parent="." instance=ExtResource("3_cqhwr")]
-position = Vector2(-1859, 318)
-
-[node name="Sleeper" parent="." instance=ExtResource("14_ma0ae")]
-position = Vector2(-525, 754)
-
-[node name="Sleeper2" parent="." instance=ExtResource("14_ma0ae")]
-position = Vector2(-1396, 535)
-rotation = 1.58484
-scale = Vector2(-1, 1)
-
-[node name="SummoningRing" parent="." node_paths=PackedStringArray("cthulhu") instance=ExtResource("3_sjqir")]
-modulate = Color(1, 1, 1, 0.643137)
-position = Vector2(1150, 701)
-cthulhu = NodePath("../Cthullu")
+position = Vector2(1394, 710)
 
 [node name="Player" parent="." node_paths=PackedStringArray("game", "camera") instance=ExtResource("2_n575r")]
+position = Vector2(-2448, 755)
 scale = Vector2(0.3, 0.3)
+lives = 1
 abilities = {
 "attack": false,
 "doublejump": false,
@@ -221,12 +213,41 @@ camera = NodePath("../Camera")
 SPEED = 60000
 
 [node name="UI" parent="." instance=ExtResource("10_6bjt1")]
+visible = false
+show_timer = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v1eaa")
 
 [node name="Spikes" parent="." instance=ExtResource("14_3kmkg")]
-position = Vector2(-1048, 676)
+position = Vector2(-1489, 809)
+
+[node name="Spikes2" parent="." instance=ExtResource("14_3kmkg")]
+position = Vector2(-732, 818)
+
+[node name="Spikes3" parent="." instance=ExtResource("14_3kmkg")]
+position = Vector2(29, 820)
+
+[node name="Spikes4" parent="." instance=ExtResource("14_3kmkg")]
+position = Vector2(792, 813)
+
+[node name="TutorialControls" type="Label" parent="."]
+offset_left = -2599.0
+offset_top = 1002.0
+offset_right = -2121.0
+offset_bottom = 1066.0
+theme = ExtResource("14_uryi4")
+theme_override_font_sizes/font_size = 55
+text = "ARROWS / WASD"
+
+[node name="TutorialExit" type="Label" parent="."]
+offset_left = 1081.0
+offset_top = 842.0
+offset_right = 1676.0
+offset_bottom = 906.0
+theme = ExtResource("14_uryi4")
+theme_override_font_sizes/font_size = 55
+text = "tO tHE NEXT REALM"
 
 [connection signal="deal" from="Cthullu" to="." method="_on_cthullu_deal"]
 [connection signal="on_gone" from="Cthullu" to="." method="_on_cthullu_on_gone"]
