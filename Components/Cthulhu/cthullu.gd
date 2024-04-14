@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var debug_level_idx = 1
+@export var debug_level_idx: int;
 
 var DealButton = load("res://Components/DealButton/button.tscn")
 

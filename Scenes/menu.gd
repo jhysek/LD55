@@ -5,7 +5,7 @@ func _ready():
 
 func _on_button_pressed():
 	play("Click")
-	Transition.switchTo("res://Scenes/game.tscn")
+	LevelSwitcher.start_level()
 
 func _on_button_mouse_entered():
 	play("Hover")

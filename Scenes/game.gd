@@ -38,7 +38,7 @@ func _on_player_died():
 	LevelSwitcher.restart_level()
 
 func _on_exit_exit_reached():
-	Transition.switchTo("res://Scenes/game.tscn")
+	LevelSwitcher.next_level()
 
 ## CTHULHU CALLBACKS ##############################
 func _on_cthullu_deal(deal):

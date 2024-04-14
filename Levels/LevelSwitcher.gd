@@ -45,15 +45,8 @@ var levels = [
 			'quit': {}
 		}
 	},
-
 	{
-		scene = "res://Scenes/game.tscn",
-		deals = {
-			'attack': abilities.attack,
-			'doublejump': abilities.doublejump,
-			'fly': abilities.fly,
-			'quit': {}
-		}
+		scene = "res://Levels/finished.tscn"
 	}
 ]
 
@@ -77,10 +70,13 @@ func restart_level():
 	get_tree().reload_current_scene()
 
 func start_level():
-	Transition.switchTo(levels[current_level])
+	Transition.switchTo(levels[current_level].scene)
 
 func next_level():
+	print("LEVEL: " + str(current_level) + " DONE")
 	current_level += 1
+
+	print("Switching to: " + str(current_level) + " / " + levels[current_level].scene)
 	if current_level < levels.size():
 		start_level()
 
