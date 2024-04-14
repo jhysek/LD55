@@ -159,7 +159,6 @@ zoom = Vector2(0.23, 0.23)
 
 [node name="Cthullu" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_cv58y")]
 position = Vector2(-936, -7)
-debug_level_idx = 3
 player = NodePath("../Player")
 
 [node name="Fog" type="ColorRect" parent="."]

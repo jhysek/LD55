@@ -19,6 +19,9 @@ func _process(delta):
 
 
 func _on_area_body_entered(body):
+	if !fired:
+		return
+
 	if body.is_in_group("Player"):
 		body.hit()
-		queue_free()
+	queue_free()

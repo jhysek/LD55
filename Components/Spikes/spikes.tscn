@@ -12,6 +12,7 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 [node name="Spike" parent="." instance=ExtResource("1_dnrlg")]
 
 [node name="Sprite2" type="Sprite2D" parent="Spike"]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
 light_mask = 2
 visibility_layer = 2
 position = Vector2(31, -56)
@@ -20,12 +21,14 @@ scale = Vector2(1, -1)
 texture = ExtResource("2_p1uvh")
 
 [node name="Sprite" type="Sprite2D" parent="Spike"]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
 light_mask = 2
 visibility_layer = 2
 position = Vector2(17.75, -6)
 texture = ExtResource("2_p1uvh")
 
 [node name="Sprite3" type="Sprite2D" parent="Spike"]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
 light_mask = 2
 visibility_layer = 2
 position = Vector2(-35, 41)

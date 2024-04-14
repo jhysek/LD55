@@ -25,6 +25,9 @@ func _process(delta):
 	else:
 		spike_cooldown = 0
 
+func is_alive():
+	return state != State.DEAD
+
 func change_state(to):
 	state = to
 	match state:
@@ -61,6 +64,13 @@ func _on_area_entered(area):
 
 func hit():
 	die()
+
+func free_unnecessary():
+	monitorable = false
+	monitoring = false
+	process_mode = Node.PROCESS_MODE_DISABLED
+	$Body/Tongue/Spike.queue_free()
+	$AwareArea.queue_free()
 
 func die():
 	if state != State.DEAD:

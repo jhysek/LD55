@@ -2,6 +2,15 @@ extends Node
 
 var current_level = 0
 var abilities = {
+	'jump' = {
+		ability = {
+			name = "Jumping",
+			code = 'jump'
+		},
+		price = {
+			lives = 4
+		}
+	},
 	'doublejump' = {
 		ability = {
 			name = "Double Jump",
@@ -17,7 +26,8 @@ var abilities = {
 			code = 'fly'
 		},
 		price = {
-			lives = 2
+			name = 'Attack',
+			code = 'attack'
 		}
 	},
 	'attack' = {
@@ -44,10 +54,30 @@ var abilities = {
 			lives = 3
 		},
 		price = {
+			name = 'Jumping',
+			code = 'jump'
+		}
+	},
+	'kill_random' = {
+		ability = {
+			name = "Kill random",
+			code = 'kill_random'
+		},
+		price = {
+			lives = 3
+		}
+	},
+
+	'kill_all' = {
+		ability = {
+			name = "Kill all",
+			code = 'kill_all'
+		},
+		price = {
 			name = 'Jump',
 			code = 'jump'
 		}
-	}
+	},
 }
 
 var levels = [
@@ -83,6 +113,28 @@ var levels = [
 	},
 
 	{
+		scene = "res://Levels/level05.tscn",
+		deals = {
+			'jump': abilities.jump,
+			'doublejump': abilities.doublejump,
+			'kill_random': abilities.kill_random,
+			'kill_all': abilities.kill_all,
+			'quit': {}
+		}
+	},
+
+	{
+		scene = "res://Levels/level06.tscn",
+		deals = {
+			'fly': abilities.fly,
+			'doublejump': abilities.doublejump,
+			'kill_random': abilities.kill_random,
+			'kill_all': abilities.kill_all,
+			'quit': {}
+		}
+	},
+
+	{
 		scene = "res://Levels/finished.tscn"
 	}
 ]
@@ -94,8 +146,19 @@ func _input(event):
 	if Input.is_action_just_released("ui_restart"):
 		restart_level()
 
+	if Input.is_key_pressed(KEY_N) and Input.is_key_pressed(KEY_SHIFT):
+		next_level()
+
+	if Input.is_key_pressed(KEY_3):
+		current_level = 2
+		start_level()
+
 	if Input.is_key_pressed(KEY_4):
 		current_level = 3
+		start_level()
+
+	if Input.is_key_pressed(KEY_5):
+		current_level = 4
 		start_level()
 
 func get_current_level():
