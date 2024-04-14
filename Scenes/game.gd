@@ -56,11 +56,15 @@ func _on_cthullu_on_summon():
 	camera.shake(1, 80, 30)
 	ui_anim.play("ShowDaemonVignette")
 	player.stop_walking()
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.pause()
 	paused = true
 
 func _on_cthullu_on_gone():
 	camera.shake(0.8, 50, 20)
 	ui_anim.play("HideDaemonVignette")
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.resume()
 	paused = false
 
 ## GLOBAL CTHULHU EVENTS ################
@@ -82,7 +86,6 @@ func kill_all_enemies():
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		if enemy.is_alive():
 			enemy.die()
-
 
 func _on_insta_kill_body_entered(body):
 	if body.is_in_group("Player"):

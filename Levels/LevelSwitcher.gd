@@ -26,8 +26,7 @@ var abilities = {
 			code = 'fly'
 		},
 		price = {
-			name = 'Attack',
-			code = 'attack'
+			lives = 3
 		}
 	},
 	'attack' = {
@@ -58,6 +57,15 @@ var abilities = {
 			code = 'jump'
 		}
 	},
+	'lives_for_doublejump' = {
+		ability = {
+			lives = 3
+		},
+		price = {
+			name = 'Double Jump',
+			code = 'doublejump'
+		}
+	},
 	'kill_random' = {
 		ability = {
 			name = "Kill random",
@@ -65,6 +73,15 @@ var abilities = {
 		},
 		price = {
 			lives = 3
+		}
+	},
+		'kill_random_2' = {
+		ability = {
+			name = "Kill random",
+			code = 'kill_random'
+		},
+		price = {
+			lives = 2
 		}
 	},
 
@@ -126,10 +143,10 @@ var levels = [
 	{
 		scene = "res://Levels/level06.tscn",
 		deals = {
+			'lives_for_doublejump': abilities.lives_for_doublejump,
 			'fly': abilities.fly,
-			'doublejump': abilities.doublejump,
-			'kill_random': abilities.kill_random,
-			'kill_all': abilities.kill_all,
+			'kill_random': abilities.kill_random_2,
+
 			'quit': {}
 		}
 	},
@@ -158,6 +175,10 @@ func _input(event):
 		start_level()
 
 	if Input.is_key_pressed(KEY_5):
+		current_level = 4
+		start_level()
+
+	if Input.is_key_pressed(KEY_6):
 		current_level = 4
 		start_level()
 

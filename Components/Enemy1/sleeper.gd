@@ -112,3 +112,12 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "Attack":
 		if aware:
 			attack()
+
+	if anim_name == "Die":
+		free_unnecessary()
+
+func pause():
+	pass
+
+func resume():
+	pass

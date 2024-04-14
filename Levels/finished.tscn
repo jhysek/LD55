@@ -314,6 +314,12 @@ stream = ExtResource("12_amqfo")
 [node name="Player" parent="." instance=ExtResource("5_kyc0j")]
 position = Vector2(1077, 475)
 scale = Vector2(-0.2, 0.2)
+abilities = {
+"attack": true,
+"doublejump": false,
+"fly": true,
+"jump": true
+}
 STATIC = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -36,6 +36,7 @@ func hit():
 
 func die():
 	if dead:
+		print("ALREADY DEAD")
 		return
 
 	dead = true
@@ -47,7 +48,6 @@ func die():
 	$AnimationPlayer.play("Die")
 	$BloodSplash.emitting = true
 	emit_signal("enemy_died", self)
-	free_unnecessary()
 
 func free_unnecessary():
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -60,3 +60,15 @@ func _on_area_entered(area):
 
 	if area.is_in_group("Weapon") and area.attacking:
 		die()
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "Die":
+		free_unnecessary()
+
+func pause():
+	if !dead:
+		$AnimationPlayer.stop()
+
+func resume():
+	if !dead:
+		$AnimationPlayer.play("Idle")
