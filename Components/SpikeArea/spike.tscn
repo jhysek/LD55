@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdbmg26bevt7w"]
+
+[ext_resource type="Script" path="res://Components/SpikeArea/spike.gd" id="1_0eel2"]
+
+[node name="Spike" type="Area2D"]
+script = ExtResource("1_0eel2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

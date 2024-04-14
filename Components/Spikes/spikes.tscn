@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c32dagsu5q5tk"]
+
+[ext_resource type="PackedScene" uid="uid://cdbmg26bevt7w" path="res://Components/SpikeArea/spike.tscn" id="1_dnrlg"]
+[ext_resource type="Texture2D" uid="uid://cvl41obj70fmw" path="res://Components/Spikes/spikes.png" id="2_p1uvh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gabib"]
+size = Vector2(91, 47)
+
+[node name="Spikes" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Spike" parent="." instance=ExtResource("1_dnrlg")]
+
+[node name="Sprite2" type="Sprite2D" parent="Spike"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(31, -56)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_p1uvh")
+
+[node name="Sprite" type="Sprite2D" parent="Spike"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(17.75, -6)
+texture = ExtResource("2_p1uvh")
+
+[node name="Sprite3" type="Sprite2D" parent="Spike"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-35, 41)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_p1uvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike"]
+position = Vector2(16.5, 13.5)
+shape = SubResource("RectangleShape2D_gabib")
