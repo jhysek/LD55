@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdpcf0ha4glpo"]
+
+[ext_resource type="AudioStream" uid="uid://crsxmg2clq6vj" path="res://Assets/Cthulhu.mp3" id="1_wjgt5"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_wjgt5")
+autoplay = true

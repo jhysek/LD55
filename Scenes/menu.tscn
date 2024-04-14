@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://i1sfyliwqydp"]
+[gd_scene load_steps=18 format=3 uid="uid://i1sfyliwqydp"]
 
 [ext_resource type="Script" path="res://Scenes/menu.gd" id="1_y52dx"]
 [ext_resource type="Texture2D" uid="uid://cwjny65dpocsu" path="res://Assets/cubist_noise.png" id="3_0myb7"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cuxykqcvvmhow" path="res://Assets/noise.png" id="6_2vvle"]
 [ext_resource type="TileSet" uid="uid://b77bn8eqs4cr5" path="res://Assets/tileset.tres" id="7_h4pwn"]
 [ext_resource type="PackedScene" uid="uid://nh6fih4c84uc" path="res://Components/SummoningRing/summoning_ring.tscn" id="8_ehfs4"]
+[ext_resource type="AudioStream" uid="uid://dflwpg07truws" path="res://Assets/sfx/hover.wav" id="11_l0k0f"]
+[ext_resource type="AudioStream" uid="uid://bek5uw6qcfvg3" path="res://Assets/sfx/click.wav" id="12_amqfo"]
 
 [sub_resource type="Shader" id="Shader_fbi6v"]
 code = "shader_type canvas_item;
@@ -93,6 +95,7 @@ stretch_mode = 1
 [node name="Cthullu" parent="." instance=ExtResource("4_re8fi")]
 position = Vector2(-622, 35)
 scale = Vector2(0.7, 0.7)
+STATIC = true
 
 [node name="Fog" parent="." instance=ExtResource("4_pc0hw")]
 custom_minimum_size = Vector2(1000, 1000)
@@ -100,20 +103,7 @@ offset_left = -1406.0
 offset_top = -1091.0
 offset_right = 1403.0
 offset_bottom = 911.0
-color = Color(1, 1, 1, 0.313726)
-
-[node name="Noise" type="TextureRect" parent="."]
-material = SubResource("CanvasItemMaterial_otlyf")
-custom_minimum_size = Vector2(100, 1000)
-offset_left = -2109.0
-offset_top = -1003.0
-offset_right = 2331.0
-offset_bottom = 997.0
-mouse_filter = 2
-texture = ExtResource("6_2vvle")
-expand_mode = 2
-stretch_mode = 1
-flip_h = true
+color = Color(1, 1, 1, 0.454902)
 
 [node name="StartBtn" parent="." instance=ExtResource("5_yy3jl")]
 offset_left = 622.0
@@ -132,6 +122,19 @@ layer_0/tile_data = PackedInt32Array(524277, 262144, 0, 524278, 262144, 0, 52427
 [node name="SummoningRing" parent="TileMap" instance=ExtResource("8_ehfs4")]
 position = Vector2(1143, 706)
 STATIC = true
+
+[node name="Noise" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_otlyf")
+custom_minimum_size = Vector2(100, 1000)
+offset_left = -2109.0
+offset_top = -1003.0
+offset_right = 2331.0
+offset_bottom = 997.0
+mouse_filter = 2
+texture = ExtResource("6_2vvle")
+expand_mode = 2
+stretch_mode = 1
+flip_h = true
 
 [node name="Title" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0.607843)
@@ -167,8 +170,11 @@ text = "Made in 48h for Ludum Dare 55 compo by Jiri Hysek."
 [node name="Sfx" type="Node" parent="."]
 
 [node name="Hover" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("11_l0k0f")
+volume_db = 3.586
 
 [node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("12_amqfo")
 
 [node name="Player" parent="." instance=ExtResource("5_kyc0j")]
 position = Vector2(1077, 475)

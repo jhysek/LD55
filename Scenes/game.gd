@@ -29,6 +29,7 @@ func _ready():
 ## ENEMY CALLBACKS ###############################
 func _on_enemy_died(enemy):
 	player.lives += 1
+	camera.shake(0.2, 80, 20)
 	ui.change_hearts(player.lives)
 
 ## PLAYER CALLBACKS ###############################

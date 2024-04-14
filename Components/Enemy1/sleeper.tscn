@@ -1,10 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://0jsq0s7cbry7"]
+[gd_scene load_steps=20 format=3 uid="uid://0jsq0s7cbry7"]
 
 [ext_resource type="Script" path="res://Components/Enemy1/sleeper.gd" id="1_k0q21"]
 [ext_resource type="Texture2D" uid="uid://dvswwr27mmidf" path="res://Components/Enemy1/sprites.png" id="1_lh0u1"]
 [ext_resource type="Texture2D" uid="uid://c7f0vcylhgf4f" path="res://Components/Splashes/02.png" id="2_nuc78"]
 [ext_resource type="Texture2D" uid="uid://duqrgvsbv2yt0" path="res://Components/Enemy1/tongue.png" id="3_7k2w8"]
 [ext_resource type="PackedScene" uid="uid://be4d4hmhr8550" path="res://Components/BloodSplash/blood_splash.tscn" id="4_bcyvp"]
+[ext_resource type="AudioStream" uid="uid://b3644ic0xyy5d" path="res://Assets/sfx/awake.wav" id="6_y5ddf"]
+[ext_resource type="AudioStream" uid="uid://d4k0e171ohly2" path="res://Assets/sfx/awake2.wav" id="7_rydi7"]
+[ext_resource type="AudioStream" uid="uid://bueyt6fr2s0hl" path="res://Assets/sfx/awake3.wav" id="8_4wfyu"]
+[ext_resource type="AudioStream" uid="uid://cptrb7tb0htd4" path="res://Assets/sfx/sleeper_dead01.wav" id="9_kaffs"]
+[ext_resource type="AudioStream" uid="uid://8fvh68vmq6s6" path="res://Assets/sfx/sleeper_dead.wav" id="10_ol35j"]
+[ext_resource type="AudioStream" uid="uid://8rdnadbxcfuh" path="res://Assets/sfx/hit.wav" id="11_s8fwd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4xoh"]
 size = Vector2(267, 138)
@@ -403,6 +409,29 @@ shape = SubResource("RectangleShape2D_15b6n")
 
 [node name="BloodSplash" parent="." instance=ExtResource("4_bcyvp")]
 position = Vector2(97, 42)
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Awake1" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("6_y5ddf")
+
+[node name="Awake2" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("7_rydi7")
+
+[node name="Awake3" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("8_4wfyu")
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sfx"]
+
+[node name="Dead1" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("9_kaffs")
+volume_db = -4.099
+
+[node name="Dead2" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("10_ol35j")
+
+[node name="Hit" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("11_s8fwd")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Body/Tongue/Spike" to="." method="_on_spike_body_entered"]

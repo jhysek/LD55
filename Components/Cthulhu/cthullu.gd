@@ -2,6 +2,7 @@ extends Node2D
 
 @export var debug_level_idx: int;
 @export var player: CharacterBody2D
+@export var STATIC: bool = false
 
 var DealButton = load("res://Components/DealButton/button.tscn")
 
@@ -64,6 +65,7 @@ func hide_deals():
 		idx += 1
 
 func make_deal(deal):
+	$Sfx/Deal.play()
 	emit_signal("deal",  deal)
 	back_off()
 
@@ -75,7 +77,9 @@ func _on_animation_player_animation_finished(anim_name):
 func summon():
 	if summoned:
 		return
-
+	if !STATIC:
+		$Sfx/Summon.play()
+		$Sfx/Summon2.play()
 	summoned = true
 	show_deals()
 	emit_signal('on_summon')

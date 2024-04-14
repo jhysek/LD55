@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://co4sxt4oj8i8p"]
+[gd_scene load_steps=22 format=3 uid="uid://co4sxt4oj8i8p"]
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_ipb4e"]
 [ext_resource type="PackedScene" uid="uid://dumey73f7jkif" path="res://Components/Camera/camera.tscn" id="2_bwilt"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dyo0lcqxcv0ns" path="res://Components/LevelUI/ui.tscn" id="10_6bjt1"]
 [ext_resource type="PackedScene" uid="uid://c32dagsu5q5tk" path="res://Components/Spikes/spikes.tscn" id="14_3kmkg"]
 [ext_resource type="PackedScene" uid="uid://0jsq0s7cbry7" path="res://Components/Enemy1/sleeper.tscn" id="14_ma0ae"]
+[ext_resource type="PackedScene" uid="uid://snoc8wxaaamd" path="res://Components/Daemon/daemon.tscn" id="15_7f74a"]
 
 [sub_resource type="Shader" id="Shader_oin6d"]
 code = "shader_type canvas_item;
@@ -172,6 +173,9 @@ environment = SubResource("Environment_v1eaa")
 
 [node name="Spikes" parent="." instance=ExtResource("14_3kmkg")]
 position = Vector2(-1048, 676)
+
+[node name="Daemon" parent="." instance=ExtResource("15_7f74a")]
+position = Vector2(-1698, -254)
 
 [connection signal="deal" from="Cthullu" to="." method="_on_cthullu_deal"]
 [connection signal="on_gone" from="Cthullu" to="." method="_on_cthullu_on_gone"]

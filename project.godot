@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Transition="*res://Components/Transition/Transition.tscn"
 LevelSwitcher="*res://Levels/LevelSwitcher.gd"
+Music="*res://Components/Music/music.tscn"
 
 [display]
 

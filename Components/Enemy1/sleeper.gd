@@ -35,14 +35,18 @@ func change_state(to):
 			$Timeout.stop()
 		State.AWAKE:
 			aware = true
+			var i = randi() % 3 + 1
+			get_node("Sfx/Awake" + str(i)).play()
 			$Body.region_rect = Rect2(0, 0, 380, 200)
 			$Timeout.start()
 		State.ATTACKING:
 			$Body.region_rect = Rect2(0, 400, 380, 200)
 		State.DEAD:
-			print("SLEEPER IS DEAD")
 			$Body.region_rect = Rect2(0, 200, 380, 200)
 			anim.play("Die")
+			$Sfx/Hit.play()
+			var i = randi() % 2 + 1
+			get_node("Sfx/Dead" + str(i)).play()
 			$Splash.show()
 			emit_signal("enemy_died", self)
 			$BloodSplash.emitting = true
@@ -70,7 +74,6 @@ func attack():
 
 func _on_spike_body_entered(body):
 	if spike_cooldown <= 0 and body.is_in_group("Player"):
-		print("PLAYER ENTERED SPIKE")
 		body.hit()
 
 func _on_aware_area_body_entered(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cehc6qdopbihl"]
+[gd_scene load_steps=29 format=3 uid="uid://cehc6qdopbihl"]
 
 [ext_resource type="Script" path="res://Components/Cthulhu/cthullu.gd" id="1_88xcm"]
 [ext_resource type="Texture2D" uid="uid://cwb7b3hfepdcb" path="res://Components/Cthulhu/body.png" id="1_xp145"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://my2060xv80gr" path="res://Components/Cthulhu/t8.png" id="12_u7xke"]
 [ext_resource type="Texture2D" uid="uid://blqd2hsqpqgxf" path="res://Components/Cthulhu/t9.png" id="13_sbnve"]
 [ext_resource type="PackedScene" uid="uid://bb7mguat235p2" path="res://Components/Deals/deals.tscn" id="18_ifu1i"]
+[ext_resource type="AudioStream" uid="uid://b4t5dbdvah27t" path="res://Assets/sfx/summon1.wav" id="19_x5sqi"]
+[ext_resource type="AudioStream" uid="uid://clxg2l01yp5xm" path="res://Assets/sfx/summon.wav" id="20_tdpkq"]
+[ext_resource type="AudioStream" uid="uid://clkwshiy2k1fg" path="res://Assets/sfx/teleport.wav" id="21_36rgt"]
 
 [sub_resource type="Animation" id="Animation_0mxj6"]
 resource_name = "Idle"
@@ -727,5 +730,16 @@ libraries = {
 }
 
 [node name="Deals" parent="." instance=ExtResource("18_ifu1i")]
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Summon" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("19_x5sqi")
+
+[node name="Summon2" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("20_tdpkq")
+
+[node name="Deal" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("21_36rgt")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
