@@ -28,12 +28,38 @@ var abilities = {
 		price = {
 			lives = 2
 		}
+	},
+	'attack_for_doublejump' = {
+		ability = {
+			name = "Attack",
+			code = 'attack'
+		},
+		price = {
+			name = 'Double Jump',
+			code = 'doublejump'
+		}
+	},
+	'lives_for_jump' = {
+		ability = {
+			lives = 3
+		},
+		price = {
+			name = 'Jump',
+			code = 'jump'
+		}
 	}
 }
 
 var levels = [
+
+
 	{
 		scene = "res://Levels/level01.tscn",
+		deals = {}
+	},
+
+	{
+		scene = "res://Levels/level03.tscn",
 		deals = {}
 	},
 
@@ -45,6 +71,17 @@ var levels = [
 			'quit': {}
 		}
 	},
+
+	{
+		scene = "res://Levels/level04.tscn",
+		deals = {
+			'attack': abilities.attack_for_doublejump,
+			'doublejump': abilities.doublejump,
+			'lives': abilities.lives_for_jump,
+			'quit': {}
+		}
+	},
+
 	{
 		scene = "res://Levels/finished.tscn"
 	}
@@ -56,6 +93,10 @@ func _ready():
 func _input(event):
 	if Input.is_action_just_released("ui_restart"):
 		restart_level()
+
+	if Input.is_key_pressed(KEY_4):
+		current_level = 3
+		start_level()
 
 func get_current_level():
 	return levels[current_level]

@@ -30,6 +30,7 @@ func change_state(to):
 	match state:
 		State.SLEEPING:
 			aware = false
+			anim.play("Idle")
 			$Body.region_rect = Rect2(0, 200, 380, 200)
 			$Timeout.stop()
 		State.AWAKE:

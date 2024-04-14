@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var debug_level_idx: int;
+@export var player: CharacterBody2D
 
 var DealButton = load("res://Components/DealButton/button.tscn")
 
@@ -35,13 +36,19 @@ func _ready():
 		button.set_meta('target', Vector2(0, idx * 200))
 		button.modulate = Color(1,1,1,0.0)
 		deals[code]['node'] = button
-		deals[code]['taken'] = false
 		idx += 1
 
 func show_deals():
 	var idx = 0
 	for code in deals:
 		var deal = deals[code]
+
+		if deal.has('price'):
+			if player.can_pay(deal.price) and player.can_get_product(deal.ability):
+				deal.node.enable()
+			else:
+				deal.node.disable()
+
 		var tween = create_tween().set_parallel(true)
 		tween.tween_property(deal.node, 'position', deal.node.get_meta('target'), 1).set_delay(2 + idx * 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 		tween.tween_property(deal.node, 'modulate', Color(1,1,1,1.0), 0.5).set_delay(2 + idx * 0.2)
@@ -57,7 +64,6 @@ func hide_deals():
 		idx += 1
 
 func make_deal(deal):
-	deal.node.disable()
 	emit_signal("deal",  deal)
 	back_off()
 

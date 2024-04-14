@@ -32,3 +32,6 @@ func set_product(product):
 
 func disable():
 	disabled = true
+
+func enable():
+	disabled = false

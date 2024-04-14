@@ -155,11 +155,11 @@ theme_override_font_sizes/font_size = 120
 text = "Cthulhu"
 
 [node name="About" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.6)
-offset_left = -1182.0
-offset_top = 717.0
-offset_right = -603.0
-offset_bottom = 751.0
+modulate = Color(1, 1, 1, 0.427451)
+offset_left = 558.0
+offset_top = 591.0
+offset_right = 1137.0
+offset_bottom = 625.0
 theme = ExtResource("3_62ivd")
 theme_override_font_sizes/font_size = 20
 text = "Made in 48h for Ludum Dare 55 compo by Jiri Hysek."

@@ -16,6 +16,8 @@ func _ready():
 	assert(cthulhu)
 	assert(camera)
 
+	cthulhu.player = player
+
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.enemy_died.connect(_on_enemy_died)
 
