@@ -701,12 +701,14 @@ autoplay = "Idle"
 speed_scale = 0.5
 
 [node name="ArmFront" type="Sprite2D" parent="Visual/Body"]
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
 position = Vector2(556, -434)
 rotation = 0.364793
 texture = ExtResource("4_24rib")
 offset = Vector2(-594, -23)
 
 [node name="Hand" type="Sprite2D" parent="Visual/Body/ArmFront"]
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
 position = Vector2(-1202.62, 77.117)
 rotation = 0.227928
 texture = ExtResource("5_qjlj7")

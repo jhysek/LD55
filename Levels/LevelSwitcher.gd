@@ -166,20 +166,8 @@ func _input(event):
 	if Input.is_key_pressed(KEY_N) and Input.is_key_pressed(KEY_SHIFT):
 		next_level()
 
-	if Input.is_key_pressed(KEY_3):
-		current_level = 2
-		start_level()
-
-	if Input.is_key_pressed(KEY_4):
-		current_level = 3
-		start_level()
-
-	if Input.is_key_pressed(KEY_5):
-		current_level = 4
-		start_level()
-
 	if Input.is_key_pressed(KEY_6):
-		current_level = 4
+		current_level = 5
 		start_level()
 
 func get_current_level():
